@@ -1,0 +1,12 @@
+a=input()
+a=list(map(int,a))
+n=len(a)
+m=0
+am=a[0]
+for i in range(n):
+ if m < a.count(a[i]):
+  m=a.count(a[i])
+  am=a[i]
+ else:
+  i=i+1
+print(am)
