@@ -1,0 +1,6 @@
+a=input()
+a=list(map(int,a))
+n=len(a)
+for i in range(n):
+ if a.count(a[i])==1:
+    print(a[i])
