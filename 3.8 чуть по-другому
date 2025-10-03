@@ -1,0 +1,19 @@
+m=int(input())
+n=[0]*m
+for k in range(m):
+  n[k] = int(input())
+#x=input()
+#x=x.split()
+#n=list(map(int,x))
+med=0
+for i in range(len(n)):
+    less=0
+    more=0
+    for j in range(len(n)):
+        if (n[i]>n[j]):
+            more+=1
+        if (n[i]<n[j]):
+            less+=1
+    if (more==less):
+        med=i
+print(n[med])
