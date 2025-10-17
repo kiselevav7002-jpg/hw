@@ -1,0 +1,36 @@
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(14, 7))
+geiger_data = pd.read_excel('lab1.1.4.xlsx')
+geiger_data['Score']
+np_data = np.array(geiger_data['Score'])
+reshaped_data_10 = np.reshape(np_data, (400, 10))
+reshaped_data_40 = np.reshape(np_data, (100, 40))
+
+
+sum_data_10 = np.sum(reshaped_data_10, 1) 
+sum_data_40 = np.sum(reshaped_data_40, 1)
+
+
+x = np.linspace(0, 50, 100)
+
+ax1.hist(sum_data_10, bins=range(0, 50, 1), label='N=400', density=True)
+ax1.plot(x, (1/(np.std(sum_data_10)*np.sqrt(2*np.pi)))*np.exp(-0.5*((x-np.mean(sum_data_10))/np.std(sum_data_10))**2), 'red', label='Теоретическое N')
+ax1.set_title('N=400')
+ax1.legend() 
+ax1.set_xlabel('Число отсчетов')
+ax1.set_ylabel('Доля случаев')
+
+ax2.hist(sum_data_40, bins=range(0, 50, 1), label='N=100', density=True)
+ax2.plot(x, (1/(np.std(sum_data_40)*np.sqrt(2*np.pi)))*np.exp(-0.5*((x-np.mean(sum_data_40))/np.std(sum_data_40))**2), 'red', label='Теоретическое N')
+ax2.set_title('N=100')
+ax2.legend() 
+ax2.set_xlabel('Число отсчетов')
+ax2.set_ylabel('Доля случаев')
+
+plt.xlabel('Число отсчетов')
+plt.ylabel('Доля случаев')
+
+
+plt.show()
