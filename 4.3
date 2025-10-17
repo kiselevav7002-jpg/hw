@@ -1,0 +1,22 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+# Загрузка данных
+df = pd.read_csv('iris_data.csv')
+# Создание фигуры с двумя подграфиками
+fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(14, 7))
+# Первая круговая диаграмма: распределение по видам ирисов
+species_counts = df['Species'].value_counts()
+ax1.set_title('Распределение по видам ирисов')
+ax1.pie(species_counts, labels=species_counts.index, autopct='%1.1f%%')
+
+# Вторая круговая диаграмма: распределение по длине лепестка
+petal_length = df['PetalLengthCm']
+categories = {
+    '≤ 1.2 см': len(petal_length[petal_length <= 1.2]),
+    '1.2-1.5 см': len(petal_length[(petal_length > 1.2) & (petal_length <= 1.5)]),
+    '> 1.5 см': len(petal_length[petal_length > 1.5])
+}
+petal_count= categories.values()
+ax2.pie(petal_count, labels=categories.keys(), autopct='%1.1f%%')
+ax2.set_title('Распределение по длине лепестка')
+plt.show()
